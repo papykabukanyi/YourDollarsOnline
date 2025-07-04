@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { initializeDatabase } from "../lib/database";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,6 +41,9 @@ export const metadata = {
   },
 };
 
+// Initialize database on app start
+initializeDatabase().catch(console.error);
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scroll-smooth">
@@ -48,7 +53,13 @@ export default function RootLayout({ children }) {
         <meta name="theme-color" content="#1f2937" />
       </head>
       <body className={`${inter.className} antialiased bg-gray-50`}>
-        {children}
+        <PayPalScriptProvider options={{
+          "client-id": process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+          currency: "USD",
+          intent: "capture"
+        }}>
+          {children}
+        </PayPalScriptProvider>
       </body>
     </html>
   );
