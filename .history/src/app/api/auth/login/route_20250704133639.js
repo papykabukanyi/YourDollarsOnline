@@ -45,20 +45,8 @@ export async function POST(request) {
       id: admin.id,
       username: admin.username,
       email: admin.email,
-      role: admin.role,
-      permissions: admin.permissions
+      role: admin.role
     });
-
-    // Log login activity
-    const logData = {
-      adminId: admin.id,
-      username: admin.username,
-      action: 'login',
-      timestamp: new Date().toISOString(),
-      ip: request.headers.get('x-forwarded-for') || 'unknown'
-    };
-
-    await redis.lPush('admin_activity_logs', JSON.stringify(logData));
 
     // Update last login
     admin.lastLogin = new Date().toISOString();
@@ -67,12 +55,11 @@ export async function POST(request) {
     return NextResponse.json({
       message: 'Login successful',
       token,
-      admin: {
+      user: {
         id: admin.id,
         username: admin.username,
         email: admin.email,
-        role: admin.role,
-        permissions: admin.permissions || []
+        role: admin.role
       }
     });
 

@@ -94,18 +94,12 @@ export function checkAdminPermission(decoded, permission) {
   return hasPermission(decoded.role, permission);
 }
 
-const auth = {
+export default {
   generateToken,
   verifyToken,
   hashPassword,
   comparePassword,
   generateId,
   isValidEmail,
-  sanitizeInput,
-  PERMISSIONS,
-  ROLES,
-  hasPermission,
-  checkAdminPermission
+  sanitizeInput
 };
-
-export default auth;
