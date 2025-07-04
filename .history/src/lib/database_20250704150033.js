@@ -56,15 +56,7 @@ export async function getRedisClient() {
   return client;
 }
 
-export async function getDatabase() {
-  try {
-    const redis = await getRedisClient();
-    return redis;
-  } catch (error) {
-    console.error('Database connection error:', error);
-    throw new Error('Database connection failed. Please check your Redis configuration.');
-  }
-}
+export async function initializeDatabase() {
   const redis = await getRedisClient();
   
   // Initialize categories if they don't exist
@@ -130,15 +122,5 @@ export async function getDatabase() {
   }
 }
 
-export async function getDatabase() {
-  try {
-    const redis = await getRedisClient();
-    return redis;
-  } catch (error) {
-    console.error('Database connection error:', error);
-    throw new Error('Database connection failed. Please check your Redis configuration.');
-  }
-}
-
-const database = { getRedisClient, getDatabase, initializeDatabase };
+const database = { getRedisClient, initializeDatabase };
 export default database;
