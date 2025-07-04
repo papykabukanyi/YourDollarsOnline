@@ -156,3 +156,4 @@ export async function initializeDatabase() {
 
 const database = { getRedisClient, getDatabase, initializeDatabase };
 export default database;
+export default database;

@@ -87,8 +87,6 @@ export async function getDatabase() {
     throw new Error('Database connection failed. Please check your Redis configuration.');
   }
 }
-
-export async function initializeDatabase() {
   const redis = await getRedisClient();
   
   // Initialize categories if they don't exist
@@ -151,6 +149,16 @@ export async function initializeDatabase() {
     };
 
     await redis.set('admin:superadmin', JSON.stringify(superAdmin));
+  }
+}
+
+export async function getDatabase() {
+  try {
+    const redis = await getRedisClient();
+    return redis;
+  } catch (error) {
+    console.error('Database connection error:', error);
+    throw new Error('Database connection failed. Please check your Redis configuration.');
   }
 }
 
