@@ -130,7 +130,7 @@ export async function POST(request) {
     
     // Save product
     await redis.set(`product:${productId}`, JSON.stringify(product));
-    await redis.sAdd('products', productId);
+    await redis.sadd('products', productId);
 
     return NextResponse.json({
       message: 'Product created successfully',

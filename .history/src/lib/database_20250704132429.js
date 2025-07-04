@@ -96,5 +96,4 @@ export async function initializeDatabase() {
   }
 }
 
-const database = { getRedisClient, initializeDatabase };
-export default database;
+export default { getRedisClient, initializeDatabase };

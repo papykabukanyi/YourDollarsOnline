@@ -4,14 +4,7 @@ import { getRedisClient } from '../../../lib/database';
 export async function GET() {
   try {
     const redis = await getRedisClient();
-    console.log('Redis connected successfully');
-    
-    // Check if products set exists
-    const productsExist = await redis.exists('products');
-    console.log('Products set exists:', productsExist);
-    
     const productIds = await redis.sMembers('products');
-    console.log('Product IDs found:', productIds);
     
     // Get all unique categories from products
     const categorySet = new Set();
@@ -32,8 +25,6 @@ export async function GET() {
       slug: category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')
     }));
 
-    console.log('Categories found:', categories);
-
     return NextResponse.json({
       success: true,
       categories
@@ -41,7 +32,7 @@ export async function GET() {
   } catch (error) {
     console.error('Error fetching categories:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch categories', details: error.message },
+      { success: false, error: 'Failed to fetch categories' },
       { status: 500 }
     );
   }
