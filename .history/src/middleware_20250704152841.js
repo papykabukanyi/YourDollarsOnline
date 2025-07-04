@@ -1,15 +1,5 @@
 import { NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key';
-
-function verifyToken(token) {
-  try {
-    return jwt.verify(token, JWT_SECRET);
-  } catch (error) {
-    return null;
-  }
-}
+import { verifyToken } from './lib/auth';
 
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
@@ -21,8 +11,6 @@ export async function middleware(request) {
     '/api/categories',
     '/api/products',
     '/api/search',
-    '/api/env-check',
-    '/api/test-redis',
     '/admin/login'
   ];
 
