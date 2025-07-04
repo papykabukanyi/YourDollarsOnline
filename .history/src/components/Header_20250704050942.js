@@ -243,7 +243,7 @@ export default function Header() {
                     onClick={() => setShowSearchResults(false)}
                   >
                     <Image
-                      src={product.images[0] || '/placeholder.svg'}
+                      src={product.images[0] || '/placeholder.jpg'}
                       alt={product.name}
                       width={48}
                       height={48}

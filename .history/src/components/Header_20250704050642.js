@@ -141,11 +141,9 @@ export default function Header() {
                       className="flex items-center p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0"
                       onClick={() => setShowSearchResults(false)}
                     >
-                      <Image
-                        src={product.images[0] || '/placeholder.svg'}
+                      <img
+                        src={product.images[0] || '/placeholder.jpg'}
                         alt={product.name}
-                        width={48}
-                        height={48}
                         className="w-12 h-12 object-cover rounded-lg mr-3"
                       />
                       <div className="flex-1">
@@ -219,55 +217,12 @@ export default function Header() {
         {/* Mobile Search Bar */}
         <div className="md:hidden pb-4">
           <div className="relative">
-            <form onSubmit={handleSearchSubmit}>
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                onFocus={() => setShowSearchResults(searchResults.length > 0)}
-                onBlur={() => setTimeout(() => setShowSearchResults(false), 200)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-            </form>
-            
-            {/* Mobile Search Results Dropdown */}
-            {showSearchResults && searchResults.length > 0 && (
-              <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded-lg shadow-lg mt-1 max-h-96 overflow-y-auto z-50">
-                {searchResults.map((product) => (
-                  <Link
-                    key={product.id}
-                    href={`/product/${product.slug || product.id}`}
-                    className="flex items-center p-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0"
-                    onClick={() => setShowSearchResults(false)}
-                  >
-                    <Image
-                      src={product.images[0] || '/placeholder.svg'}
-                      alt={product.name}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 object-cover rounded-lg mr-3"
-                    />
-                    <div className="flex-1">
-                      <h4 className="text-sm font-medium text-gray-900">{product.name}</h4>
-                      <p className="text-sm text-gray-500">${product.price}</p>
-                    </div>
-                  </Link>
-                ))}
-                {searchResults.length === 10 && (
-                  <div className="p-3 text-center border-t border-gray-100">
-                    <Link
-                      href={`/search?q=${encodeURIComponent(searchQuery)}`}
-                      className="text-blue-600 hover:text-blue-800 text-sm font-medium"
-                      onClick={() => setShowSearchResults(false)}
-                    >
-                      View all results
-                    </Link>
-                  </div>
-                )}
-              </div>
-            )}
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
           </div>
         </div>
       </div>
