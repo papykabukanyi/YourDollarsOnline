@@ -29,12 +29,6 @@ export function getEnvVar(key, defaultValue = null) {
  * Validate required environment variables
  */
 export function validateEnvironment() {
-  // Skip validation during build
-  if (IS_BUILD_TIME) {
-    console.warn('Skipping environment validation during build');
-    return { missing: [], available: requiredEnvVars };
-  }
-
   const missing = [];
   const available = [];
   
@@ -50,13 +44,30 @@ export function validateEnvironment() {
   const envReport = {
     missing,
     available,
-    nodeEnv: process.env.NODE_ENV || 'development',
+    nodeEnv: getEnvVar('NODE_ENV', 'development'),
+    allAvailable: Object.keys(process.env).filter(k => 
+      [...requiredEnvVars, ...optionalEnvVars].includes(k)
+    ),
   };
   
   console.log('Environment validation report:', envReport);
   
-  if (missing.length > 0 && process.env.NODE_ENV === 'production') {
-    throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+  if (missing.length > 0) {
+    console.error('Missing required environment variables:', missing);
+    console.error('Available environment variables:', available);
+    
+    // Don't throw during build time or static export
+    if (IS_BUILD_TIME || IS_STATIC_EXPORT) {
+      console.warn('Warning: Missing environment variables during build. This may cause runtime errors.');
+      return envReport;
+    }
+    
+    // In production runtime, this should be a hard error
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+    } else {
+      console.warn('Warning: Missing environment variables in development:', missing);
+    }
   }
   
   return envReport;
