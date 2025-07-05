@@ -36,8 +36,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Skip static generation for dynamic routes
-  output: 'standalone',
 };
 
 module.exports = nextConfig;

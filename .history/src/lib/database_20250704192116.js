@@ -14,12 +14,6 @@ export async function getRedisClient() {
       
       const redisUrl = getRedisUrl();
       
-      // If no Redis URL (during build), return null
-      if (!redisUrl) {
-        console.log('No Redis URL available, skipping connection...');
-        return null;
-      }
-      
       console.log('Redis connection info:', {
         hasRedisUrl: !!redisUrl,
         nodeEnv: process.env.NODE_ENV,

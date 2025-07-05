@@ -1,6 +1,9 @@
+import { Inter } from "next/font/google";
 import "../globals.css";
 import { AuthProvider } from "../../contexts/AuthContext";
 import MobileAdminNavigation from "../../components/MobileAdminNavigation";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Admin Dashboard - YourDollarsOnline",

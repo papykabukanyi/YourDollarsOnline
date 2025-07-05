@@ -30,14 +30,15 @@ const nextConfig = {
     RATE_LIMIT_MAX: process.env.RATE_LIMIT_MAX,
     RATE_LIMIT_WINDOW: process.env.RATE_LIMIT_WINDOW,
   },
+  experimental: {
+    esmExternals: 'loose',
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Skip static generation for dynamic routes
-  output: 'standalone',
 };
 
 module.exports = nextConfig;

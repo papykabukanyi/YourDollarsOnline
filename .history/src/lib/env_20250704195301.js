@@ -76,8 +76,8 @@ export function validateEnvironment() {
     console.error('Missing required environment variables:', missing);
     console.error('Available environment variables:', available);
     
-    // Don't throw during build time or static export
-    if (IS_BUILD_TIME || IS_STATIC_EXPORT) {
+    // Don't throw during build time
+    if (IS_BUILD_TIME) {
       console.warn('Warning: Missing environment variables during build. This may cause runtime errors.');
       return envReport;
     }
@@ -100,8 +100,8 @@ export function getRedisUrl() {
   const redisUrl = getEnvVar('REDIS_URL');
   
   if (!redisUrl) {
-    // Don't throw during build or static export
-    if (IS_BUILD_TIME || IS_STATIC_EXPORT || process.env.SKIP_ENV_VALIDATION === 'true') {
+    // Don't throw during build
+    if (IS_BUILD_TIME || process.env.SKIP_ENV_VALIDATION === 'true') {
       console.warn('Warning: REDIS_URL not available during build');
       return null;
     }
