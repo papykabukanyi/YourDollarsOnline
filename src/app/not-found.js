@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { HomeIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export default function NotFound() {
   return (
@@ -18,7 +17,6 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center justify-center w-full bg-white text-gray-900 py-3 px-6 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-200"
           >
-            <HomeIcon className="h-5 w-5 mr-2" />
             Go to Homepage
           </Link>
           
@@ -26,7 +24,6 @@ export default function NotFound() {
             href="/products"
             className="inline-flex items-center justify-center w-full bg-transparent border-2 border-white text-white py-3 px-6 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-colors duration-200"
           >
-            <MagnifyingGlassIcon className="h-5 w-5 mr-2" />
             Browse Products
           </Link>
         </div>

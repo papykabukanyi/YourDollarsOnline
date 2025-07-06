@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 export default function Error({ error, reset }) {
   useEffect(() => {
@@ -12,7 +11,6 @@ export default function Error({ error, reset }) {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
         <div className="bg-white rounded-xl shadow-lg p-8">
-          <ExclamationTriangleIcon className="h-16 w-16 text-red-500 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Oops! Something went wrong
           </h2>
